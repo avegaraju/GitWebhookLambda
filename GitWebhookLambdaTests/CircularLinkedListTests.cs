@@ -9,29 +9,49 @@ namespace GitWebhookLambdaTests
 {
     public class CircularLinkedListTests
     {
+
         [Fact]
-        public void Add_SetsPreviousNodeToItself()
+        public void Add_SetsHeadAndTailToNewNode()
         {
             var sut = new CircularLinkedList<Reviewer>();
             sut.Add(new Reviewer("R"));
-            sut.Head.Value.UserName.Should().Be("R");
+            sut.Head.Should().Be(sut.Tail);
         }
 
         [Fact]
-        public void Add_SetsNextNodeToItself()
+        public void Add_SetsNextOfHeadToTail()
         {
             var sut = new CircularLinkedList<Reviewer>();
             sut.Add(new Reviewer("R"));
-            sut.Head.Value.UserName.Should().Be("R");
+            sut.Head.Next.Should().Be(sut.Tail);
         }
 
         [Fact]
-        public void Add_WhenANodeExists_ThenNextOfTailIsTheNewNode()
+        public void Add_SetsPreviousOfHeadToTail()
+        {
+            var sut = new CircularLinkedList<Reviewer>();
+            sut.Add(new Reviewer("R"));
+            sut.Head.Previous.Should().Be(sut.Tail);
+        }
+
+        [Fact]
+        public void Add_WhenANodeExists_ThenNextOfTailIsTheHead()
         {
             var sut = new CircularLinkedList<Reviewer>();
             sut.Add(new Reviewer("R1"));
             sut.Add(new Reviewer("R2"));
-            sut.Tail.Next.Value.UserName.Should().Be("R2");
+            sut.Tail.Next.Should().Be(sut.Head);
+        }
+
+        [Fact]
+        public void Add_WhenANodeExists_ThenPreviousOfTailIsTheFirstAndHeadNode()
+        {
+            var sut = new CircularLinkedList<Reviewer>();
+            sut.Add(new Reviewer("R1"));
+            sut.Add(new Reviewer("R2"));
+            sut.Tail.Previous.Value.Should().Be(sut.Head.Value);
+            sut.Head.Value.UserName.Should().Be("R1");
+
         }
 
         [Fact]
