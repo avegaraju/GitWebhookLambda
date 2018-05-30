@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 
+using GitWehookLambda.DataStructures;
 using GitWehookLambda.Entities.EqualEffort;
 
 namespace GitWehookLambda.Selection
 {
     public class EqualEffort: ISelector
     {
-        private readonly List<Reviewer> _reviewers = new List<Reviewer>();
-        public IReadOnlyList<Reviewer> Reviewers => _reviewers;
+        private readonly CircularLinkedList<Reviewer> _reviewers = new CircularLinkedList<Reviewer>();
+        public CircularLinkedList<Reviewer> Reviewers => _reviewers;
 
         public EqualEffort(List<string> reviewers)
         {

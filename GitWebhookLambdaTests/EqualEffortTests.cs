@@ -3,6 +3,7 @@ using System.Linq;
 
 using FluentAssertions;
 
+using GitWehookLambda.DataStructures;
 using GitWehookLambda.Entities.EqualEffort;
 using GitWehookLambda.Selection;
 
@@ -12,8 +13,11 @@ namespace GitWebhookLambdaTests
 {
     public class EqualEffortTests
     {
-        [Fact]
-        public void Ctor_Builds_Reviewer_Instances_PerReviewerUserName()
+        [Theory]
+        [InlineData(3)]
+        [InlineData(6)]
+        [InlineData(10)]
+        public void Reviewers_CanBeIteratedCircularly_OverIndicatedNumberOfTimes(int loopCount)
         {
             string[] reviewers = new[]
                                  {
@@ -24,11 +28,14 @@ namespace GitWebhookLambdaTests
 
             EqualEffort sut = new EqualEffort(reviewers.ToList());
 
-            sut.Reviewers.Count.Should().Be(reviewers.Length);
-            sut.Reviewers.Should().BeOfType<List<Reviewer>>();
-            foreach (string reviewer in reviewers)
+            var counter = 0;
+
+            foreach (Node<Reviewer> reviewer in sut.Reviewers)
             {
-                sut.Reviewers.Should().Contain(r => r.UserName.Equals(reviewer));
+                if(counter == loopCount)
+                    break;
+
+                counter++;
             }
         }
     }
