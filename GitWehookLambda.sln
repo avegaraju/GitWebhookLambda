@@ -5,7 +5,14 @@ VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitWehookLambda", "GitWehookLambda\GitWehookLambda.csproj", "{4B58A947-5A42-47F0-B042-CF80C1F4A7E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitWebhookLambdaTests", "GitWebhookLambdaTests\GitWebhookLambdaTests.csproj", "{464020CD-0BAB-4D29-B8C2-D160F2C56DE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GitWebhookLambdaTests", "GitWebhookLambdaTests\GitWebhookLambdaTests.csproj", "{464020CD-0BAB-4D29-B8C2-D160F2C56DE7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{B136FDD9-7D96-4D89-9ED5-D9F740D4D4DA}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+		Build.ps1 = Build.ps1
+		tools\packages.config = tools\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
